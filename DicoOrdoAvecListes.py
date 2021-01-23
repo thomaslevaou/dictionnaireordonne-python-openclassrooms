@@ -2,38 +2,38 @@
 # -*-coding:Utf-8 -*
 
 import json #permet d'afficher facilement les dictionnaires via la commande print()
- 
+
 class DictionnaireOrdonne():
     """TLV 05/10/2019
     Classe faisant l'équivalent d'un dictionnaire, mais avec des méthodes sort() et reverse()
     permettant de faire des tris par clé
-    Par défaut, le dictionnaire d'une instance est vide""" 
+    Par défaut, le dictionnaire d'une instance est vide"""
     def __init__(self, dicodefaut=dict(), **kwargs):
         """Constructeur : par défaut, l'attribut est un dictionnaire vide
         Ou alors un dictionnaire déjà fait passé en paramètre
         Ou alors un dictionnaire fait à partir des valeurs de celui-ci passées en paramètre"""
         if len(kwargs) == 0:
         #S'il n'y a qu'une seule valeur du type dictionnaire passée en paramètre
-        #Alors la valeurs de kwarg est {}. On vérifie donc la longueur pour 
+        #Alors la valeurs de kwarg est {}. On vérifie donc la longueur pour
         #mettre le dictionnaire par defaut dans cette situation
             self.listecles = list(dicodefaut.keys())
             self.listevaleurs = list(dicodefaut.values())
         else:
-        #kwargs est un dico des valeurs passées en paramètre 
+        #kwargs est un dico des valeurs passées en paramètre
         #Utile lorsqu'on veut passer plusieurs paramètres d'affilée
             self.listecles=list(kwargs.keys())
-            self.listevaleurs=list(kwargs.values())   
+            self.listevaleurs=list(kwargs.values())
 
 
     def __str__(self):
-        """Afficher élégamment l'objet dans l'interpréteur comme demandé dans la spec
+        """Afficher élégamment l'objet dans l'interpréteur comme demandé dans la spécification
         json.dumps permet d'afficher le dictionnaire avec print() via str"""
         dictionnaireAffichage = dict(zip(self.listecles, self.listevaleurs))
         return json.dumps(dictionnaireAffichage)
         #On pouvait aussi utiliser repr de la manière astucieuse d'OpenClassrooms, en utilisant
         #les repr() déjà existant des listes
 
-        
+
     def __getitem__(self,index):
         """Méthode appelée quand on fait objet[index]"""
         if index in self.listecles:
@@ -56,7 +56,7 @@ class DictionnaireOrdonne():
             del self.listevaleurs[self.listecles.index(index)]
             #Puis on supprime la valeur correspondant à l'indice trouvé
             self.listecles.remove(index)
-        
+
     def __contains__(self,index):
         if index in self.listecles:
             return True
@@ -67,32 +67,32 @@ class DictionnaireOrdonne():
         return len(self.listecles)
 
     def __add__(self, dico_a_ajouter):
-        """Gestion de l'addition : Pour d1 et d2 deux dictionnaires ordonnes, 
+        """Gestion de l'addition : Pour d1 et d2 deux dictionnaires ordonnes,
         faire d1 + d2 ajoute les clés et valeurs de d2 à d1"""
         d3 = DictionnaireOrdonne()
         d3.listecles = self.listecles + dico_a_ajouter.listecles
         d3.listevaleurs = self.listevaleurs + dico_a_ajouter.listevaleurs
         return d3 #Une autre manière de faire un peu plus robuste, notamment si des cles sont communes entre les deux dictionnaires,  a été proposée en correction
-        
+
     def reverse(self):
         #inverse les éléments du dictionnaire ordonné
         self.listecles.reverse()
         self.listevaleurs.reverse()
-        return self           
-    
+        return self
+
     def sort(self):
         #trie les éléments du dictionnaire par clé
-        #Utilisation d'un dictionnaire intermédiaire pour conserver les liaisons avec les clés 
+        #Utilisation d'un dictionnaire intermédiaire pour conserver les liaisons avec les clés
         dicoIntermediaire=dict(zip(self.listecles, self.listevaleurs))
         self.listecles.sort()
-        for i in range(0,len(self.listecles)): 
+        for i in range(0,len(self.listecles)):
             self.listevaleurs[i] = dicoIntermediaire[self.listecles[i]]
         return self
-        #Une manière plus astucieuse sans utiliser dict(zip) a été proposée dans la correction, en utilisant getitem() déjà définie 
+        #Une manière plus astucieuse sans utiliser dict(zip) a été proposée dans la correction, en utilisant getitem() déjà définie
 
     def keys(self):
         return self.listecles
-    
+
     def values(self):
         return self.listevaleurs
 
@@ -106,7 +106,7 @@ class DictionnaireOrdonne():
         """retourne les clés et valeurs du dictionnaire"""
         #self.indicedebutdico = 1
         #while (self.indicedebutdico) < len(self.listecles):
-        #    yield(self.listecles[self.indicedebutdico])         
+        #    yield(self.listecles[self.indicedebutdico])
         #dictionnaireAffichage = dict(zip(self.listecles, self.listevaleurs))
         #return dictionnaireAffichage.items()
         for i, cle in enumerate(self.listecles):
@@ -115,8 +115,8 @@ class DictionnaireOrdonne():
 
 #Itérateur inutile
 class ItDictionnaireOrdonne:
-    """Un itérateur permettant de parcourir la liste des clés dans le dictionnaire si on fait 
-    for cle in dictionnaire'. Il paraît qu'on pourrait utiliser un générateur, mais je n'ai 
+    """Un itérateur permettant de parcourir la liste des clés dans le dictionnaire si on fait
+    for cle in dictionnaire'. Il paraît qu'on pourrait utiliser un générateur, mais je n'ai
     toujours pas bien compris comment un générateur pourrait remplacer un itérateur dans cette
     situation."""
     def __init__(self, liste_des_cles):
@@ -130,9 +130,9 @@ class ItDictionnaireOrdonne:
             raise StopIteration
         self.position += 1 #On avance d'un cran dans la liste des clés
         return self.liste_des_cles[self.position]
-        
 
-    
+
+
 
 
 
