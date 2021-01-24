@@ -8,7 +8,8 @@ Pour ce faire, les méthodes `sort` et `reverse` ont été définies en triant l
 
 La version de Python utilisée dans le cadre de ce TP est la version 3.7.
 Après avoir cloné ce projet, celui-ci peut être exécuté en exécutant les commandes suivantes à la racine:
-``̀
+
+```
 chmod 700 dictionnaire_ordonne.py
 ./dictionnaire_ordonne.py
 ```
