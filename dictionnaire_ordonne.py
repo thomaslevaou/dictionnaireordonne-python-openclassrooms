@@ -17,7 +17,7 @@ class DictionnaireOrdonne():
         #Alors la valeurs de kwarg est {}. On vérifie donc la longueur pour
         #mettre le dictionnaire par defaut dans cette situation
             self.listecles = list(dicodefaut.keys())
-            self.listevaleurs = list(dicodefaut.values())
+            self.listevaleurs = list(dicodefaut .values())
         else:
         #kwargs est un dico des valeurs passées en paramètre
         #Utile lorsqu'on veut passer plusieurs paramètres d'affilée
@@ -30,9 +30,6 @@ class DictionnaireOrdonne():
         json.dumps permet d'afficher le dictionnaire avec print() via str"""
         dictionnaireAffichage = dict(zip(self.listecles, self.listevaleurs))
         return json.dumps(dictionnaireAffichage)
-        #On pouvait aussi utiliser repr de la manière astucieuse d'OpenClassrooms, en utilisant
-        #les repr() déjà existant des listes
-
 
     def __getitem__(self,index):
         """Méthode appelée quand on fait objet[index]"""
@@ -72,7 +69,7 @@ class DictionnaireOrdonne():
         d3 = DictionnaireOrdonne()
         d3.listecles = self.listecles + dico_a_ajouter.listecles
         d3.listevaleurs = self.listevaleurs + dico_a_ajouter.listevaleurs
-        return d3 #Une autre manière de faire un peu plus robuste, notamment si des cles sont communes entre les deux dictionnaires,  a été proposée en correction
+        return d3
 
     def reverse(self):
         #inverse les éléments du dictionnaire ordonné
@@ -88,7 +85,6 @@ class DictionnaireOrdonne():
         for i in range(0,len(self.listecles)):
             self.listevaleurs[i] = dicoIntermediaire[self.listecles[i]]
         return self
-        #Une manière plus astucieuse sans utiliser dict(zip) a été proposée dans la correction, en utilisant getitem() déjà définie
 
     def keys(self):
         return self.listecles
@@ -98,101 +94,51 @@ class DictionnaireOrdonne():
 
     def __iter__(self):
         """Itération sur la liste des clés en faisant un for, comme spécifié"""
-        #return ItDictionnaireOrdonne(self.listecles)
-        #On pouvait simplement retourner l'itérateur des clés, à la :
         return iter(self.listecles)
 
     def items(self):
         """retourne les clés et valeurs du dictionnaire"""
-        #self.indicedebutdico = 1
-        #while (self.indicedebutdico) < len(self.listecles):
-        #    yield(self.listecles[self.indicedebutdico])
-        #dictionnaireAffichage = dict(zip(self.listecles, self.listevaleurs))
-        #return dictionnaireAffichage.items()
         for i, cle in enumerate(self.listecles):
             valeur=self.listevaleurs[i]
             yield (cle,valeur) #On retourne simplement comme ça les couples clé valeur
 
-#Itérateur inutile
-class ItDictionnaireOrdonne:
-    """Un itérateur permettant de parcourir la liste des clés dans le dictionnaire si on fait
-    for cle in dictionnaire'. Il paraît qu'on pourrait utiliser un générateur, mais je n'ai
-    toujours pas bien compris comment un générateur pourrait remplacer un itérateur dans cette
-    situation."""
-    def __init__(self, liste_des_cles):
-        self.liste_des_cles = liste_des_cles
-        self.position = -1
 
-    def __next__(self):
-        """Parcours des clés"""
-        #print('parkour')
-        if (self.position + 1)  == len(self.liste_des_cles):
-            raise StopIteration
-        self.position += 1 #On avance d'un cran dans la liste des clés
-        return self.liste_des_cles[self.position]
-
-
-
-
-
-
-#main
-print('Test d\'une initialisation vide')
+print('Initialisation de fruits')
 fruits = DictionnaireOrdonne()
 print(fruits)
-print('Test d\'une initialisation avec un dictionnaire en paramètre')
-fruits2={}
-fruits2["pseudo"]="Peterkolios"
-fruits2["mot de passe"]="Oranges"
-fruits3=DictionnaireOrdonne(fruits2)
-print(fruits3)
-print('Test de plusieurs arguments')
-fruits4 = DictionnaireOrdonne(a='orange',b='nectarine')
-print(fruits4)
-print('Test de getitem')
-print(fruits4['a'])
-print('Test de setitem')
-fruits4['c']='pomme'
-print(fruits4)
-fruits4['b']='mandarine'
-print(fruits4)
-
-print('Suppression de la mandarine')
-del fruits4['b']
-print(fruits4)
-
-#print('b' in fruits4)
-#print('Longueur du dico actuellement :')
-#print(len(fruits4))
-
-#print('Test d\'un parcours itératif')
-#for cle in fruits4:
-#    print(cle)
-#    print(fruits4[cle])
-
-print('Test d\'une addition')
-print('fruits4')
-print(fruits4)
-print('fruits3')
-print(fruits3)
-fruits5=fruits4+fruits3
-print('somme')
-print(fruits5) #Le remplacement de clés déjà existantes est fait grâce à print()
-print('Test d\'inversion')
-fruits5.reverse()
-print(fruits5)
-print('Test de tri')
-fruits6=fruits5.sort()
-print(fruits6)
-print('Affichage des clés')
-print(fruits6.keys())
-print('Affichage des valeurs')
-print(fruits6.values())
-
-print('Test de la boucle for')
-for cle in fruits6:
+print('Ajouts des clés pomme, poire, prune et melon avec pour quantités respectives 52, 34, 128 et 15')
+fruits['pomme'] = 52
+fruits['poire'] = 34
+fruits['prune'] = 128
+fruits["melon"] = 15
+print(fruits)
+print('Tri des fruits')
+fruits.sort()
+print(fruits)
+print('Initialisation de legumes')
+legumes = DictionnaireOrdonne(carotte = 26, haricot = 48)
+print(legumes)
+print('Taille de legumes')
+print(len(legumes))
+print('Inversion de legumes')
+legumes.reverse()
+print(legumes)
+print('Ajout des legumes aux fruits')
+fruits = fruits + legumes
+print(fruits)
+print('Suppression des haricots')
+del fruits['haricot']
+print('haricot est-il dans fruits ?')
+print('haricot' in fruits)
+print('Affichage de la quantité associée à haricot dans legumes')
+print(legumes['haricot'])
+print('Affichage de tous les légumes')
+for cle in legumes:
     print(cle)
-
-print('test items')
-for cle, valeur in fruits6.items():
-    print("Clé {} contient valeur {}.".format(cle,valeur))
+print('Clés de legumes')
+print(legumes.keys())
+print('Valeurs de legumes')
+print(legumes.values())
+print('Affichage simultané des noms et quantités des légumes')
+for nom, qtt in legumes.items():
+    print("{0} ({1})".format(nom, qtt))
