@@ -8,7 +8,7 @@ tris et des inversions.
 Pour ce faire, les méthodes `sort` et `reverse` ont notamment été définies en triant le dictionnaire en fonction des clés.
 
 La version de Python utilisée dans le cadre de ce TP est la version 3.7.
-Après avoir cloné ce projet, celui-ci peut être exécuté sur Linux en exécutant les commandes suivantes à la racine:
+Après avoir cloné ce projet, celui-ci peut être exécuté sur Linux en exécutant les commandes suivantes à sa racine:
 
 ```
 chmod 700 dictionnaire_ordonne.py
