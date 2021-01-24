@@ -15,8 +15,7 @@ chmod 700 dictionnaire_ordonne.py
 ./dictionnaire_ordonne.py
 ```
 
-Ce qui permettra d'afficher dans la console les résultats de quelques lignes de code Python
-permettant de tester le bon fonctionnement de ce dictionnaire ordonné :
+Ce qui permettra d'afficher dans la console les lignes suivantes, qui permettent de tester le bon fonctionnement de ce dictionnaire ordonné :
 
 ```
 Initialisation de fruits
@@ -26,7 +25,6 @@ Ajouts des clés pomme, poire, prune et melon avec pour quantités respectives 5
 Tri des fruits
 {"melon": 15, "poire": 34, "pomme": 52, "prune": 128}
 Initialisation de legumes
-
 {"carotte": 26, "haricot": 48}
 Taille de legumes
 2
