@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3.7
 # -*-coding:Utf-8 -*
 
 import json #permet d'afficher facilement les dictionnaires via la commande print()
